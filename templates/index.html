@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grundig NVR/Kamera Test</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f4f4f4; }
+        h1 { color: #333; }
+        .log-box {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .snapshot {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grundig NVR & Kamera Test</h1>
+    <p><a href="/test" class="button">Verbindung testen</a></p>
+    <div class="log-box">
+        {% for entry in log %}
+            <p>{{ entry }}</p>
+        {% endfor %}
+    </div>
+    <h3>📷 Live Snapshot-Stream</h3>
+    <img id="snapshot" class="snapshot" width="640" height="360" />
+    <script>
+        const snapshot = document.getElementById("snapshot");
+        function reloadSnapshot() {
+            const ts = new Date().getTime();
+            snapshot.src = "http://10.20.5.160/cgi-bin/snapshot.cgi?user=admin&password=12345&t=" + ts;
+        }
+        setInterval(reloadSnapshot, 1500);
+        reloadSnapshot();
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+
+run = "python3 main.py"
+language = "python3"
+entrypoint = "main.py"
+
+[env]
+FLASK_ENV = "development"
